@@ -26,6 +26,7 @@ function TodoApp({ initialTodos }) {
   }
 
   /** update a todo with updatedTodo */
+  //TODO: use map
   function update(updatedTodo) {
     let newTodos = [...todos];
     for (let i = 0; i < newTodos.length; i++) {
@@ -37,6 +38,7 @@ function TodoApp({ initialTodos }) {
   }
 
   /** delete a todo by id */
+  //TODO: use filter
   function remove(id) {
     const newTodos = [...todos];
     for (let i = 0; i < newTodos.length; i++) {
@@ -52,6 +54,7 @@ function TodoApp({ initialTodos }) {
       <div className="row">
 
         <div className="col-md-6">
+          {/* TODO: make turnary */}
           {todos.length > 0 &&
             <EditableTodoList todos={todos} update={update} remove={remove} />
           }
@@ -70,7 +73,10 @@ function TodoApp({ initialTodos }) {
 
           <section>
             <h3 className="mb-3">Add Nü</h3>
-            <TodoForm initialFormData={{title:"", description:"", priority:0}} handleSave={create} />
+            <TodoForm
+              initialFormData={{title:"", description:"", priority:1}}
+              handleSave={create}
+            />
           </section>
         </div>
 
