@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import TodoApp from "./TodoApp";
 import Footer from "./Footer";
+import Quote from "./Quote";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
-import Quote from "./Quote";
 import getRandomQuote from "./quoteAPI";
-import { useState } from "react";
 
 /** Site application.
  *
@@ -24,13 +23,24 @@ function App() {
   return (
     <main className="App">
       <header className="container-fluid pt-4 pb-1">
-        <div className="container">
-          <h1>Prøductïv</h1>
-          <p className="lead">The best name in todo list management.</p>
-        </div>
-        <div className="QuoteContainer">
-        {quoteIsShowing && <Quote quote={quote} />}
-          <button onClick={handleQuoteButtonClick}>Click here for an inspirational quote!</button>
+        <div className="row">
+          <div className="col">
+            <div className="container">
+              <h1>Prøductïv</h1>
+              <p className="lead">The best name in todo list management.</p>
+            </div>
+          </div>
+          <div className="col d-flex flex-column justify-content-end align-items-end">
+            <div className="QuoteContainer">
+              {quoteIsShowing && <Quote quote={quote} />}
+              <button
+                className="btn btn-sm btn-secondary"
+                onClick={handleQuoteButtonClick}
+              >
+                Click here for an inspirational quote!
+              </button>
+            </div>
+          </div>
         </div>
       </header>
 
