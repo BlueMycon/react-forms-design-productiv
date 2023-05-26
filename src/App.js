@@ -3,13 +3,18 @@ import TodoApp from "./TodoApp";
 import Footer from "./Footer";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
+import Quote from "./Quote";
+import getRandomQuote from "./quoteAPI"
+import { useState } from "react";
+
 
 /** Site application.
  *
  * App -> TodoApp
  **/
 
-function App() {
+async function App() {
+  const [quote, setQuote] = useState(await getRandomQuote());
   return (
       <main className="App">
         <header className="container-fluid pt-4 pb-1">
@@ -17,6 +22,7 @@ function App() {
             <h1>Prøductïv</h1>
             <p className="lead">The best name in todo list management.</p>
           </div>
+          <Quote quote={quote}/>
         </header>
 
         <section className="container mt-4">

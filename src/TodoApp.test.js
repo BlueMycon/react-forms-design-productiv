@@ -1,4 +1,3 @@
-
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 import TodoApp from "./TodoApp";
@@ -13,7 +12,9 @@ describe("TodoApp component", function () {
   });
 
   it("contains expected main section with className", function () {
-    const { container, debug } = render(<TodoApp initialTodos={Test.TEST_TODOS} />);
+    const { container, debug } = render(
+      <TodoApp initialTodos={Test.TEST_TODOS} />
+    );
     const main = container.querySelector("main");
     debug(main);
     expect(main).toHaveClass("TodoApp");
@@ -25,19 +26,30 @@ describe("TodoApp component", function () {
   });
 
   it("updates a todo", function () {
-    const { container } = render(<TodoApp initialTodos={Test.TEST_TODOS} />);
+    const { container, getByLabelText, queryByText } = render(
+      <TodoApp initialTodos={Test.TEST_TODOS} />
+    );
 
     const editButton = container.querySelector(".EditableTodo-toggle");
     fireEvent.click(editButton);
 
+    expect(queryByText("Updated!")).not.toBeInTheDocument();
+
+    const titleInput = container.querySelector("#newTodo-title");
+    const descriptionInput = container.querySelector("#newTodo-description");
+    const priorityInput = getByLabelText("Priority:");
+
+    fireEvent.change(titleInput, { target: { value: "Updated!" } });
+    fireEvent.change(descriptionInput, { target: { value: "a new description" } });
+    fireEvent.change(priorityInput, { target: { value: "3" } });
+
     const submitButton = container.querySelector(".NewTodoForm-addBtn");
     fireEvent.click(submitButton);
 
-    expect(container).toContainHTML("Updated!");
+    expect(queryByText("Updated!")).toBeInTheDocument();
   });
 
   it("removes a todo", function () {
-
     const updatedTodos = [
       {
         id: 2,
@@ -61,5 +73,4 @@ describe("TodoApp component", function () {
 
     expect(container).not.toContainHTML("Write some code");
   });
-
 });
