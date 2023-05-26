@@ -4,29 +4,39 @@ import Footer from "./Footer";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
 import Quote from "./Quote";
-import getRandomQuote from "./quoteAPI"
+import getRandomQuote from "./quoteAPI";
 import { useState } from "react";
-
 
 /** Site application.
  *
  * App -> TodoApp
  **/
 
-async function App() {
-  const [quote, setQuote] = useState(await getRandomQuote());
-  return (
-      <main className="App">
-        <header className="container-fluid pt-4 pb-1">
-          <div className="container">
-            <h1>Prøductïv</h1>
-            <p className="lead">The best name in todo list management.</p>
-          </div>
-          <Quote quote={quote}/>
-        </header>
+function App() {
+  const [quote, setQuote] = useState("");
+  const [quoteIsShowing, setQuoteIsShowing] = useState(false);
 
-        <section className="container mt-4">
-          <TodoApp initialTodos={[
+  async function handleQuoteButtonClick() {
+    const quote = await getRandomQuote();
+    setQuote(quote);
+    setQuoteIsShowing(true);
+  }
+  return (
+    <main className="App">
+      <header className="container-fluid pt-4 pb-1">
+        <div className="container">
+          <h1>Prøductïv</h1>
+          <p className="lead">The best name in todo list management.</p>
+        </div>
+        <div className="QuoteContainer">
+        {quoteIsShowing && <Quote quote={quote} />}
+          <button onClick={handleQuoteButtonClick}>Click here for an inspirational quote!</button>
+        </div>
+      </header>
+
+      <section className="container mt-4">
+        <TodoApp
+          initialTodos={[
             {
               id: 1,
               title: "Code!",
@@ -45,11 +55,12 @@ async function App() {
               description: "In bed by 11:15",
               priority: 3,
             },
-          ]} />
+          ]}
+        />
 
-          <Footer />
-        </section>
-      </main>
+        <Footer />
+      </section>
+    </main>
   );
 }
 

@@ -1,4 +1,4 @@
-export default async function Quote({quote}) {
+export default function Quote({quote}) {
   return (
     <div className="Quote">
       {quote.text} - {quote.author}
