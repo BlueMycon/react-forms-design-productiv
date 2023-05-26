@@ -1,43 +1,45 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
 import TodoForm from "./TodoForm";
-import TEST_TODOS from "./_testCommon";
+import {TEST_TODOS} from "./_testCommon";
 
-// FIXME: we also need to import update and remove things and mock them
+const update = jest.fn();
+const remove = jest.fn();
 
 describe("TodoForm component", function () {
-  it("renders without crashing", function () {
-    render(<TodoForm initialTodos={TEST_TODOS} handleSave=/>);
+  it("renders update form without crashing", function () {
+    render(<TodoForm initialFormData={TEST_TODOS[0]} handleSave={update}/>);
+  });
+
+  it("renders delete form without crashing", function () {
+    render(<TodoForm initialFormData={TEST_TODOS[0]} handleSave={remove}/>);
   });
 
   it("contains expected main section with className", function () {
-    const { container, debug } = render(<TodoApp initialTodos={TEST_TODOS}/>);
-    const main = container.querySelector("main");
-    debug(main);
+    const { container, debug } = render(
+      <TodoForm initialFormData={TEST_TODOS[0]} handleSave={update}/>
+    );
+    const form = container.querySelector("form");
+    debug(form);
+    expect(form).toHaveClass("NewTodoForm");
   });
 
   it("matches snapshot", function () {
-    const { container } = render(<TodoApp initialTodos={TEST_TODOS}/>);
+    const { container } = render(
+      <TodoForm initialFormData={TEST_TODOS[0]} handleSave={update}/>
+    );
     expect(container).toMatchSnapshot();
   });
 
-  it("can add a new item", function () {
-    const { getByLabelText, queryByText } = render(<ShoppingList />);
+  it("runs handleSave function when submit button is clicked", function () {
+    const { container } = render(
+      <TodoForm initialFormData={TEST_TODOS[0]} handleSave={update}/>
+    );
 
-    // no items yet
-    expect(queryByText("ice cream: 100")).not.toBeInTheDocument();
+    const submitButton = container.querySelector(".NewTodoForm-addBtn");
+    fireEvent.click(submitButton);
 
-    const nameInput = getByLabelText("Name:");
-    const qtyInput = getByLabelText("Qty:");
-    const submitBtn = queryByText("Add a new item!");
-
-    // fill out the form
-    fireEvent.change(nameInput, { target: { value: "ice cream" } });
-    fireEvent.change(qtyInput, { target: { value: 100 } });
-    fireEvent.click(submitBtn);
-
-    // item exists!
-    expect(queryByText("ice cream: 100")).toBeInTheDocument();
+    expect(update).toHaveBeenCalledTimes(1);
   });
 });
 

@@ -152,23 +152,27 @@ exports[`TodoApp component matches snapshot 1`] = `
             Top Todo
           </h3>
           <div
-            class="Todo"
+            class="TopTodo"
           >
-            <div>
-              <b>
-                Make dinner
-              </b>
-               
-              <small>
-                (priority: 
-                1
-                )
-              </small>
-            </div>
-            <div>
-              <small>
-                Cook something healthy
-              </small>
+            <div
+              class="Todo"
+            >
+              <div>
+                <b>
+                  Make dinner
+                </b>
+                 
+                <small>
+                  (priority: 
+                  1
+                  )
+                </small>
+              </div>
+              <div>
+                <small>
+                  Cook something healthy
+                </small>
+              </div>
             </div>
           </div>
         </section>

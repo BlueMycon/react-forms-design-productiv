@@ -15,7 +15,9 @@ function TopTodo({todos}) {
   let top = todos.reduce(
       (acc, cur) => cur.priority < acc.priority ? cur : acc, todos[0]);
 
-  return <Todo todo={top}/>;
+  return <div className="TopTodo">
+    <Todo todo={top}/>
+  </div>;
 }
 
 export default TopTodo;

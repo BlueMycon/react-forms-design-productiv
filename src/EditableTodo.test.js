@@ -79,6 +79,6 @@ describe("EditableTodo component", function () {
     );
     const deleteButton = container.querySelector(".EditableTodo-delBtn");
     fireEvent.click(deleteButton);
-    expect(container).not.toContainHTML("Code!");
+    expect(remove).toHaveBeenCalledTimes(1);
   });
 });

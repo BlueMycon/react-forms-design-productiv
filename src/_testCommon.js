@@ -19,4 +19,17 @@ const TEST_TODOS = [
   },
 ];
 
-export { TEST_TODOS };
+/** update a todo with updatedTodo */
+function update(updatedTodo) {
+  let newTodos = TEST_TODOS.map(todo => (todo.id === updatedTodo.id ? updatedTodo : todo));
+  return newTodos;
+}
+
+/** delete a todo by id */
+function remove(id) {
+  let newTodos = TEST_TODOS.filter(todo => todo.id !== id);
+  return newTodos;
+}
+
+export { TEST_TODOS, update, remove };
+
