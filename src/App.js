@@ -32,13 +32,13 @@ function App() {
           <div className="col d-flex flex-column justify-content-end align-items-end">
             <div className="QuoteContainer">
               {quote.isShowing && <Quote quote={quote.text} />}
-              <button
-                className="btn btn-sm btn-secondary"
-                onClick={handleQuoteButtonClick}
-              >
-                Click here for an inspirational quote!
-              </button>
             </div>
+            <button
+              className="btn btn-sm btn-secondary"
+              onClick={handleQuoteButtonClick}
+            >
+              Click here for an inspirational quote!
+            </button>
           </div>
         </div>
       </header>
