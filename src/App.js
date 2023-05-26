@@ -12,14 +12,13 @@ import getRandomQuote from "./quoteAPI";
  **/
 
 function App() {
-  const [quote, setQuote] = useState("");
-  const [quoteIsShowing, setQuoteIsShowing] = useState(false);
+  const [quote, setQuote] = useState({ text: "", isShowing: false });
 
   async function handleQuoteButtonClick() {
-    const quote = await getRandomQuote();
-    setQuote(quote);
-    setQuoteIsShowing(true);
+    const text = await getRandomQuote();
+    setQuote({ text: text, isShowing: true });
   }
+
   return (
     <main className="App">
       <header className="container-fluid pt-4 pb-1">
@@ -32,7 +31,7 @@ function App() {
           </div>
           <div className="col d-flex flex-column justify-content-end align-items-end">
             <div className="QuoteContainer">
-              {quoteIsShowing && <Quote quote={quote} />}
+              {quote.isShowing && <Quote quote={quote.text} />}
               <button
                 className="btn btn-sm btn-secondary"
                 onClick={handleQuoteButtonClick}

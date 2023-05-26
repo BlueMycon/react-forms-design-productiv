@@ -1,7 +1,7 @@
-export default function Quote({quote}) {
+export default function Quote({quote: {text, author}}) {
   return (
     <div className="Quote">
-      {quote.text} - {quote.author}
+      {text} - {author}
     </div>
   )
 }
