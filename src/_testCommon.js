@@ -19,4 +19,4 @@ const TEST_TODOS = [
   },
 ];
 
-export default TEST_TODOS
+export { TEST_TODOS };

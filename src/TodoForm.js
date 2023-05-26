@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-/** Form for adding.
+/** Form for adding and editing.
  *
  * Props:
  * - initialFormData
