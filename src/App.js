@@ -30,9 +30,7 @@ function App() {
             </div>
           </div>
           <div className="col d-flex flex-column justify-content-end align-items-end">
-            <div className="QuoteContainer">
-              {quote.isShowing && <Quote quote={quote.text} />}
-            </div>
+            {quote.isShowing && <Quote quote={quote.text} />}
             <button
               className="btn btn-sm btn-secondary"
               onClick={handleQuoteButtonClick}
