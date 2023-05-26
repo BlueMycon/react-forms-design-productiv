@@ -1,20 +1,22 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import App from "./App";
+import TodoApp from "./TodoApp";
+import TEST_TODOS from "./_testCommon";
 
-describe("productiv app", function () {
+describe("TodoApp component", function () {
   it("renders without crashing", function () {
-    render(<App />);
+    render(<TodoApp initialTodos={TEST_TODOS}/>);
   });
 
-  it("contains expected title", function () {
-    const result = render(<App />);
-    expect(result.queryByText("Prøductïv")).toBeInTheDocument();
+  it("contains expected main section with className", function () {
+    const { container, debug } = render(<TodoApp initialTodos={TEST_TODOS}/>);
+    const main = container.querySelector("main");
+    debug(main);
   });
 
-  // it ("rendered quotes app", function () {
-  //   const result = render(<App />);
-  //   expect(result.queryByText("Click here for an inspirational quøte!")).toBeInTheDocument();
-  // });
+  it("matches snapshot", function () {
+    const { container } = render(<TodoApp initialTodos={TEST_TODOS}/>);
+    expect(container).toMatchSnapshot();
+  });
 });
 

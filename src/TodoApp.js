@@ -26,26 +26,14 @@ function TodoApp({ initialTodos }) {
   }
 
   /** update a todo with updatedTodo */
-  //TODO: use map
   function update(updatedTodo) {
-    let newTodos = [...todos];
-    for (let i = 0; i < newTodos.length; i++) {
-      if (newTodos[i].id === updatedTodo.id) {
-        newTodos[i] = updatedTodo;
-      }
-    }
+    let newTodos = todos.map(todo => (todo.id === updatedTodo.id ? updatedTodo : todo));
     setTodos(newTodos);
   }
 
   /** delete a todo by id */
-  //TODO: use filter
   function remove(id) {
-    const newTodos = [...todos];
-    for (let i = 0; i < newTodos.length; i++) {
-      if (newTodos[i].id === id) {
-        newTodos.splice(i, 1);
-      }
-    }
+    let newTodos = todos.filter(todo => todo.id !== id);
     setTodos(newTodos);
   }
 
@@ -54,27 +42,24 @@ function TodoApp({ initialTodos }) {
       <div className="row">
 
         <div className="col-md-6">
-          {/* TODO: make turnary */}
-          {todos.length > 0 &&
-            <EditableTodoList todos={todos} update={update} remove={remove} />
-          }
-          {todos.length === 0 &&
-            <span className="text-muted">You have no todos.</span>
+          {todos.length > 0
+            ? <EditableTodoList todos={todos} update={update} remove={remove} />
+            : <span className="text-muted">You have no todos.</span>
           }
         </div>
 
         <div className="col-md-6">
           {todos.length > 0 &&
             <section className="mb-4">
-            <h3>Top Todo</h3>
-            <TopTodo todos={todos}/>
-          </section>
+              <h3>Top Todo</h3>
+              <TopTodo todos={todos} />
+            </section>
           }
 
           <section>
             <h3 className="mb-3">Add Nü</h3>
             <TodoForm
-              initialFormData={{title:"", description:"", priority:1}}
+              initialFormData={{ title: "", description: "", priority: 1 }}
               handleSave={create}
             />
           </section>

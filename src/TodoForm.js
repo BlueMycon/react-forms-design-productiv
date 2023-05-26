@@ -6,7 +6,8 @@ import React, { useState } from "react";
  * - initialFormData
  * - handleSave: function to call in parent.
  *
- * //TODO: edit docstring, add state
+ * State:
+ * - formData
  *
  * { TodoApp, EditableTodo } -> TodoForm
  */

@@ -9,7 +9,8 @@ import TodoForm from "./TodoForm";
  * - update(): fn to call to update a todo
  * - remove(): fn to call to remove a todo
  *
- * //TODO: add state
+ * State
+ * - isEditing: boolean
  *
  * EditableTodoList -> EditableTodo -> { Todo, TodoForm }
  */
